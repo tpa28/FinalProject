@@ -12,7 +12,7 @@ import java.util.ArrayList;
  */
 public class Forest implements Serializable {
     private String name;
-    private static ArrayList<Tree> trees;
+    private ArrayList<Tree> trees;
 
     /**
      * Constructs a new Forest object with a null name and initializes the ArrayList of trees.
@@ -52,7 +52,7 @@ public class Forest implements Serializable {
      */
     public void addTree() {
         Tree newTree;
-        newTree = Tree.makeRandomTree(); // Create a new random tree
+        newTree = Tree.makeRandomTree();
         trees.add(newTree);
     }
 
@@ -153,7 +153,6 @@ public class Forest implements Serializable {
      */
     public static boolean save(String forestName, Forest theForest) {
         ObjectOutputStream output = null;
-        theForest = new Forest(forestName);
         try {
             output = new ObjectOutputStream(new FileOutputStream(forestName + ".db"));
             output.writeObject(theForest);
@@ -173,37 +172,13 @@ public class Forest implements Serializable {
         }
     }
 
-    public static boolean writeForestToDB(Forest theForest){
-        ObjectOutputStream toStream = null;
-        String fileName = theForest.name + ".db";
-
-        try{
-            toStream = new ObjectOutputStream(new FileOutputStream(fileName));
-            toStream.writeObject(theForest);
-            return true;
-        }
-        catch (IOException e) {
-            System.out. println("Error saving to " + fileName); return (false);
-        } finally {
-            if (toStream != null) {
-                try {
-                    toStream.close();
-                } catch (IOException e) {
-                    System.out.println("Error closing " + fileName);
-                }
-            }
-        }
-    }
-
-
     /**
-     * Loads the forest data from a file.
+     * Loads the forest data to a file.
      *
-     * @param fileName the name of the file to load the forest data from
-     * @return the loaded Forest object if successful, null otherwise
-     * @throws IOException if an I/O error occurs
+     * @param fileName the name of the file to load the forest data to
+     * @return true if the forest data is successfully loaded, null otherwise
      */
-    public static Forest load(String fileName) throws IOException {
+    public static Forest load(String fileName){
         ObjectInputStream input = null;
         Forest forest;
 

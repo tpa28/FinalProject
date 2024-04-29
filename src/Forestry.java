@@ -32,9 +32,7 @@ public class Forestry implements Serializable{
 
 //----Welcome message
         char inputFromUser;
-        String fileName = null;
-        Forest[] forests = new Forest[args.length];
-
+        Forest newForestTest;
         /**
          * Iterates over the command-line arguments representing forest CSV files.
          * Initializes forests from these files and allows users to interact with them through a menu-driven interface.
@@ -43,113 +41,104 @@ public class Forestry implements Serializable{
          * @throws IOException            If an I/O error occurs while reading forests from files.
          * @throws ClassNotFoundException If a class not found exception occurs during object deserialization.
          */
+        System.out.println("Welcome to the Forestry Simulation");
+        System.out.println("----------------------------------");
         for (int argIndex = 0; argIndex < args.length; argIndex++) {
             File file = new File(args[argIndex] + ".csv");
             if (file.exists()) {
-                forests[argIndex] = readForest(args[argIndex]);
-                System.out.println("Welcome to the Forestry Simulation");
-                System.out.println("----------------------------------");
+
                 System.out.println("Initializing from " + args[argIndex] + "\n");
-            } else {
-                System.out.println("Error opening/reading " + args[argIndex] + ".csv");
-                forests[argIndex] = readForest(args[argIndex-1]);
-                System.out.println("Initializing from " + args[argIndex-1] + "\n");
-            }
-            Forest currentFile = readForest(args[argIndex]);
-            do {
-                printMenu();
-                String optionInput = keyboard.next().toUpperCase();
-
-                // Input validation to for optionInput
-                while (!optionInput.toLowerCase().matches("[pacgrslnx]")) {
-                    System.out.println("Invalid menu option, try again \n");
+                newForestTest = new Forest(args[argIndex]);
+                readForest(args[argIndex], newForestTest);
+                do {
                     printMenu();
-                    optionInput = keyboard.next();
-                } // end of while loop
-                inputFromUser = optionInput.charAt(0);
+                    String optionInput = keyboard.next().toUpperCase();
 
-                // Use switch statement to perform the corresponding action based on the chosen inputFromUser
-                switch (inputFromUser) {
-                    case 'P':
-                    case 'p':
-                        if (forests[argIndex] != null) {
-                            forests[argIndex].print();
-                        }
-                        break;
-                    case 'A':
-                    case 'a':
-                        if (forests[argIndex] != null) {
-                            forests[argIndex].addTree();
-                        }
-                        break;
-                    case 'C':
-                    case 'c':
-                        int treeNumber;
-                        do {
-                            try {
-                                System.out.print("Tree number to cut down: ");
-                                treeNumber = keyboard.nextInt();
-                                if (forests[argIndex] != null) {
-                                    forests[argIndex].cutTree(treeNumber);
+                    inputFromUser = optionInput.charAt(0);
+
+                    // Use switch statement to perform the corresponding action based on the chosen inputFromUser
+                    switch (inputFromUser) {
+                        case 'P':
+                        case 'p':
+                            newForestTest.print();
+                            break;
+                        case 'A':
+                        case 'a':
+                            newForestTest.addTree();
+                            break;
+                        case 'C':
+                        case 'c':
+                            int treeNumber;
+                            do {
+                                try {
+                                    System.out.print("Tree number to cut down: ");
+                                    treeNumber = keyboard.nextInt();
+                                    if (newForestTest != null) {
+                                        newForestTest.cutTree(treeNumber);
+                                    }
+                                } catch (InputMismatchException e) {
+                                    System.out.println("That is not an integer");
+                                    keyboard.next();
+                                    treeNumber = -1;
                                 }
-                            } catch (InputMismatchException e) {
-                                System.out.println("That is not an integer");
-                                keyboard.next();
-                                treeNumber = -1;
+                            } while (treeNumber < 0);
+                            break;
+                        case 'G':
+                        case 'g':
+                            if (newForestTest != null) {
+                                newForestTest.simulateYearlyGrowth();
                             }
-                        } while (treeNumber < 0);
-                        break;
-                    case 'G':
-                    case 'g':
-                        if (forests[argIndex] != null) {
-                            forests[argIndex].simulateYearlyGrowth();
-                        }
-                        break;
-                    case 'R':
-                    case 'r':
-                        double heightToReap;
-                        do {
-                            try {
-                                System.out.print("Height to reap from: ");
-                                heightToReap = keyboard.nextDouble();
-                                if (forests[argIndex] != null) {
-                                    forests[argIndex].reap(heightToReap);
+                            break;
+                        case 'R':
+                        case 'r':
+                            double heightToReap;
+                            do {
+                                try {
+                                    System.out.print("Height to reap from: ");
+                                    heightToReap = keyboard.nextDouble();
+                                    if (newForestTest != null) {
+                                        newForestTest.reap(heightToReap);
+                                    }
+                                } catch (InputMismatchException e) {
+                                    System.out.println("That is not an integer");
+                                    keyboard.nextLine();
+                                    heightToReap = -1;
                                 }
-                            } catch (InputMismatchException e) {
-                                System.out.println("That is not an integer");
-                                keyboard.nextLine();
-                                heightToReap = -1;
+                            } while (heightToReap < 0);
+                            break;
+                        case 'S':
+                        case 's':
+                            Forest.save(newForestTest.getName(), newForestTest);
+                            break;
+                        case 'L':
+                        case 'l':
+                            System.out.print("Enter forest name: ");
+                            String forestName = keyboard.next();
+
+                            if (Forest.load(forestName) != null) {
+                                newForestTest = Forest.load(forestName);
+                                System.out.println("Forest loaded successfully.");
                             }
-                        } while (heightToReap < 0);
-                        break;
-                    case 'S':
-                    case 's':
-                        assert currentFile != null;
-                        Forest.writeForestToDB(currentFile);
-                        Forest.save(args[argIndex], forests[argIndex]);
-                        break;
-                    case 'L':
-                    case 'l':
-                        System.out.print("Enter forest name: ");
-                        String forestName = keyboard.next();
-                        Forest loadedForest = Forest.load(forestName);
+                            break;
+                        case 'N':
+                        case 'n':
+                            System.out.println("Moving to the next forest");
+                            break;
+                        case 'X':
+                        case 'x':
+                            break;
+                        default:
+                            System.out.println("Invalid menu option, try again \n");
 
-                        if (loadedForest != null) {
-                            forests[argIndex] = loadedForest;
-                            // Update the forest name to match the loaded forest data
-                            args[argIndex] = loadedForest.getName();
-                            System.out.println("Forest loaded successfully.");
-                        }
-                        break;
-                }// end of switch
+                    }// end of switch
 
-            } while (inputFromUser != 'N' && inputFromUser != 'X'); // end of do while loop
+                } while (inputFromUser != 'N' && inputFromUser != 'X'); // end of do while loop
 
-            if(inputFromUser == 'X'){
-                break;
-            }
-            if(inputFromUser == 'N'){
-                System.out.println("Moving to the next forest");
+                if(inputFromUser == 'X'){
+                    break;
+                }
+            } else {
+                System.out.println("Error opening " + args[argIndex] + ".csv");
             }
 
         }// end of for loop
@@ -174,10 +163,9 @@ public class Forestry implements Serializable{
      * @param fileName The name of the CSV file containing forest data.
      * @return A Forest object containing trees parsed from the CSV file.
      */
-    public static Forest readForest(String fileName) {
+    public static void readForest(String fileName, Forest forest) {
         try {
             Scanner file = new Scanner(new File(fileName + ".csv"));
-            Forest forest = new Forest(fileName);
 
             while (file.hasNext()) {
                 String line = file.nextLine();
@@ -195,13 +183,11 @@ public class Forestry implements Serializable{
                 double growthRate = Double.parseDouble(data[3]);
 
                 Tree tree = new Tree(species, yearPlanting, height, growthRate);
-                forest.addTree(tree); // Add the parsed tree to the forest
+                forest.addTree(tree);
             }
-            file.close(); // Close the file scanner
-            return forest;
+            file.close();
         } catch (FileNotFoundException e) {
             System.out.println("Error opening/reading " + fileName + ".csv");
-            return null;
         }
     }
 }

@@ -4,19 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="83401a70-120c-4f01-bfe6-27059ea9e184" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Acadian.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FinalProject.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Montane.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Forest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Forestry.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tree.java" afterDir="false" />
+    <list default="true" id="83401a70-120c-4f01-bfe6-27059ea9e184" name="Changes" comment="Final Project">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Montane.db" beforeDir="false" afterPath="$PROJECT_DIR$/Montane.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Forest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Forest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Forestry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Forestry.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +25,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo"><![CDATA[{
   "associatedIndex": 3
 }]]></component>
@@ -46,12 +41,17 @@
   "keyToString": {
     "ASKED_ADD_EXTERNAL_FILES": "true",
     "Application.Forestry.executor": "Run",
+    "Application.TestFile.executor": "Run",
     "Application.Unnamed.executor": "Run",
+    "Application.Unnamedtest.executor": "Run",
+    "Application.test.executor": "Run",
+    "Application.test2.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "onboarding.tips.debug.path": "/Users/timiajayi/Desktop/CSC120/FinalProject/src/Main.java"
+    "onboarding.tips.debug.path": "/Users/timiajayi/Desktop/CSC120/FinalProject/src/Main.java",
+    "settings.editor.selected.configurable": "editor.preferences.tabs"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -59,15 +59,27 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.test">
     <configuration name="Forestry" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Forestry" />
       <module name="FinalProject" />
-      <option name="PROGRAM_PARAMETERS" value="Montane Acadian Nonexisitent" />
+      <option name="PROGRAM_PARAMETERS" value="Montane NonExistent Acadian" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="test" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="Forestry" />
+      <module name="FinalProject" />
+      <option name="PROGRAM_PARAMETERS" value="Montane Acadian" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.Forestry" />
+      <item itemvalue="Application.test" />
+    </list>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -85,7 +97,20 @@
       <option name="presentableId" value="Default" />
       <updated>1714396522296</updated>
     </task>
+    <task id="LOCAL-00001" summary="Final Project">
+      <option name="closed" value="true" />
+      <created>1714405577967</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1714405577967</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Final Project" />
+    <option name="LAST_COMMIT_MESSAGE" value="Final Project" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
